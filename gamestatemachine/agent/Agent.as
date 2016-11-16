@@ -6,10 +6,7 @@
 	import agent.states.DriveHomeState;
 	import agent.states.BackOffState;
 	import agent.states.SpecialState;
-	import agent.states.CrowdIdleState;
-	import agent.states.CheeringState;
-	import agent.states.StageIdleState;
-	import agent.states.ShakingState;
+
 	
 	import flash.display.Graphics;
 	import flash.display.Shape;
@@ -28,7 +25,9 @@
 		public static const DRIVEHOME:IAgentState = new DriveHomeState(); //Listen to the up & W key to gain progress
 		public static const BACKOFF:IAgentState = new BackOffState(); //Listen to the down key & S to gain progress
 		public static const SPECIAL:IAgentState = new SpecialState(); //Listen to the 1 key and delete key
-		public static const CROWDIDLE:IAgentState = new CrowdIdleState(); //When bar is near middle the crowd idles
+		
+		
+		/*public static const CROWDIDLE:IAgentState = new CrowdIdleState(); //When bar is near middle the crowd idles
 		public static const CHEERING:IAgentState = new CheeringState(); //Crowd reacts if the bar is very onsided
 		public static const STAGEIDLE:IAgentState = new StageIdleState(); //Stage is at idle. No physics affects
 		public static const SHAKING:IAgentState = new ShakingState(); //Stage shakes and affects banners (use InverseKinematics here)
@@ -37,12 +36,8 @@
 		*/
 		
 		
-		private const RAD_DEG:Number = 180 / Math.PI;
-		
 		private var _previousState:IAgentState; //The previous executing state
 		private var _currentState:IAgentState; //The currently executing state
-		private var _pointer:Shape;
-		private var _tf:TextField;
 		
 		public var numCycles:int = 0; //Number of updates that have executed for the current state. Timing utility.
 		
@@ -54,11 +49,11 @@
 		
 		public function update():void {
 			if (!_currentState) return; //If there's no behavior, we do nothing
-			numCycles++; 
-			_currentState.update(this);
+				numCycles++; 
+				_currentState.update(this);
 			
 			}
-		}
+		
 		public function setState(newState:IAgentState):void {
 			if (_currentState == newState) return;
 			if (_currentState) {
