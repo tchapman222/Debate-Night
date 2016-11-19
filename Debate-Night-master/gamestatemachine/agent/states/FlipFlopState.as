@@ -29,7 +29,7 @@
 		}
 
 
-		public function keyDownHandler(evt: KeyboardEvent): void {
+		public function keyDownHandler(evt: KeyboardEvent, a: Agent): void {
 			if (evt.keyCode == 37) {
 				trace("test1");
 				score += 1;
