@@ -14,10 +14,8 @@
 		public function FlipFlopState() {}
 
 		public function update(a: Agent): void {
-			trace("update");
-			if (!a.numCycles) {
+			if (a.numCycles) {
 				a._score += score;
-				trace(a._score);
 			}
 		}
 

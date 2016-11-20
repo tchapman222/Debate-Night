@@ -16,8 +16,9 @@
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 	import flash.events.Event;
+	import flash.display.MovieClip;
 	
-	public class Agent extends Sprite
+	public class Agent extends MovieClip
 	{
 		
 		//New States
@@ -43,10 +44,14 @@
 		
 		public var _score:Number = 0;
 		
+		public var currentStateNum:Number = 0; //assigns a variable to our current state
+		public var prevStateNum:Number;
+		
 		public function Agent() 
 		{
 			//Boring stuff here
 			addEventListener(Event.ADDED_TO_STAGE,init);
+			addEventListener(Event.ENTER_FRAME, update);
 
 			
 		}
@@ -56,14 +61,32 @@
 			setState(FLIPFLOP); //Set the initial state
 		}
 		
-		public function update():void {
-			if (!_currentState) return; //If there's no behavior, we do nothing
-				numCycles++; 
-				_currentState.update(this);
-			
+		public function update(e:Event):void {
+			trace(numCycles);
+			if (numCycles < 100) { //Lasts for 10 seconds
+				numCycles++;
+				_currentState.update(this); //updates the Current State
+			} else {
+				prevStateNum = currentStateNum;
+				while (prevStateNum == currentStateNum) { //makes sure we don't get the same State twice
+					currentStateNum = Math.round(Math.random()*2); //sets the state to a random rounded number between 0 and 2
+				}
+				if (currentStateNum == 0) { //assigns a state to each number
+					setState(FLIPFLOP);
+				}
+				if (currentStateNum == 1) {
+					setState(DRIVEHOME);
+				}
+				if (currentStateNum == 2) {
+					setState(BACKOFF);
+				}
+				trace(currentStateNum);
 			}
+		}
+			
 		
 		public function setState(newState:IAgentState):void {
+			
 			if (_currentState == newState) return;
 			if (_currentState) {
 				_currentState.exit(this);
@@ -72,6 +95,8 @@
 			_currentState = newState;
 			_currentState.enter(this);
 			numCycles = 0;
+			trace(_currentState);
+			
 		}
 		
 		public function say(s:String){
