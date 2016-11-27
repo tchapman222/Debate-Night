@@ -42,7 +42,7 @@
 		
 		public var numCycles:int = 0; //Number of updates that have executed for the current state. Timing utility.
 		
-		public var _score:Number = 0;
+		public static var _score:Number = 0;
 		
 		public var currentStateNum:Number = 0; //assigns a variable to our current state
 		public var prevStateNum:Number;
@@ -62,8 +62,8 @@
 		}
 		
 		public function update(e:Event):void {
-			trace(numCycles);
-			if (numCycles < 100) { //Lasts for 10 seconds
+			//trace(numCycles);
+			if (numCycles < 100) { //Lasts for (4.1) seconds (24 fps)
 				numCycles++;
 				_currentState.update(this); //updates the Current State
 			} else {
