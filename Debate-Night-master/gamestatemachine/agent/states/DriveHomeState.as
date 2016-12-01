@@ -25,8 +25,13 @@
 		
 		public function keyDownHandler(evt: KeyboardEvent): void {
 			if (evt.keyCode == 38) {
-				trace("up");
+				//trace("up");
 				Agent._score += 1;
+				trace(Agent._score);
+			}
+			if (evt.keyCode == 87) {
+				//trace("up");
+				Agent._score -= 1;
 				trace(Agent._score);
 			}
 		}

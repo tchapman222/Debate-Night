@@ -47,6 +47,8 @@
 		public var currentStateNum:Number = 0; //assigns a variable to our current state
 		public var prevStateNum:Number;
 		
+		public var slider:MovieClip = new mc_Slider();
+		
 		public function Agent() 
 		{
 			//Boring stuff here
@@ -59,6 +61,9 @@
 		public function init(e:Event){
 			trace("Init");
 			setState(FLIPFLOP); //Set the initial state
+			addChild(slider);
+			slider.x = 250;
+			slider.y = 200;
 		}
 		
 		public function update(e:Event):void {
@@ -82,6 +87,8 @@
 				}
 				trace(currentStateNum);
 			}
+			slider.x = _score + 250;
+			
 		}
 			
 		

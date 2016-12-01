@@ -29,6 +29,11 @@
 				Agent._score += 1;
 				trace(Agent._score);
 			}
+			if (evt.keyCode == 83) {
+				//trace("down");
+				Agent._score -= 1;
+				trace(Agent._score);
+			}
 		}
 		
 		public function exit(a:Agent):void
